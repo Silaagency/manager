@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 String sessionId = "";
 String email = "";
 
-String _baseUrl = "manager-backend-self.vercel.app";
+String _baseUrl = "https://manager-backend-self.vercel.app";
 
 Future<void> saveSessionIdAndEmail(String _sessionId, String _email) async {
   final prefs = await SharedPreferences.getInstance();

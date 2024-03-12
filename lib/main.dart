@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Log in'),
+      home: const MyHomePage(title: 'Connectez-vous'),
       
       navigatorObservers: <NavigatorObserver>[routeObserver],
     );
@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
       });
 
     } catch(e) {
-      showToast(e.toString(), context:context, position: StyledToastPosition.top);
+      showToast(e.toString().substring(11), context:context, position: StyledToastPosition.top, duration: Duration(seconds: 5));
     }
   }
 
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
@@ -135,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         controller: passwordController,
                         obscureText: true,
                         decoration: const InputDecoration(
-                          labelText: 'Password',
+                          labelText: 'Mot de passe',
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)
                             
                           ),
-                          child: const Text('Log in'), // Button text
+                          child: const Text('Se onnectez'), // Button text
                         ),
                       )
                       ,
@@ -164,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                           ),
-                          child: const Text('Register'), // Button text
+                          child: const Text('Incrivez-vous'), // Button text
                         ),
                       )
                     ],

@@ -137,18 +137,18 @@ class _AddServicePageeState extends State<AddServicePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: const Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Add Service'),
+        title: const Text('Ajouter un service'),
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Center(
-            child: Container(
+            child: Card(
               color: AppColors.backgroundColor,
               child: Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 40, right: 20, left: 20),
+                padding: const EdgeInsets.only(top: 40, bottom: 40, right: 30, left: 30),
                 child: SizedBox(
                   width: 400,
                   child:  Column(
@@ -159,7 +159,7 @@ class _AddServicePageeState extends State<AddServicePage> {
                       TextField(
                         controller: nameController,
                         decoration: InputDecoration(
-                          labelText: 'Name',
+                          labelText: 'Nom',
                           border: const OutlineInputBorder(),
                           errorText: getGenericError(nameController),
                         ),
@@ -193,7 +193,7 @@ class _AddServicePageeState extends State<AddServicePage> {
                                     child: TextField(
                                       controller: textControllers[index][0],
                                       decoration: InputDecoration(
-                                      labelText: 'Name',
+                                      labelText: 'Nom',
                                       border: const OutlineInputBorder(),
                                       errorText: getGenericError(textControllers[index][0]),
                                       ),
@@ -243,7 +243,7 @@ class _AddServicePageeState extends State<AddServicePage> {
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                                   ),
-                                  child: const Text('Add'), // Button text
+                                  child: const Text('Ajouter'), // Button text
                                 )
                               ) 
                             ),
@@ -275,7 +275,7 @@ class _AddServicePageeState extends State<AddServicePage> {
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                           ),
-                          child: const Text('Save'), // Button text
+                          child: const Text('Enregistrer'), // Button text
                         )
                       ) 
                     ],

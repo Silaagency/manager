@@ -128,10 +128,10 @@ class _AddNewCommissionPageState extends State<AddNewCommissionPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: const Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Add NCommission'),
+        title: const Text('Ajouter une commission'),
       ),
       body: Center(
         child: SingleChildScrollView(

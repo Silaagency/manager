@@ -103,7 +103,7 @@ class _AddEmployeePageState extends State<AddEmployeePage> with RouteAware  {
         paidCommissions: paidCommissions,
         penalizedAbsence: true,
         salary: salary,
-        absence: employee!.paymentInfo.absence
+        absence: employee?.paymentInfo.absence??0
     ));
 
     // add employee
@@ -141,7 +141,7 @@ class _AddEmployeePageState extends State<AddEmployeePage> with RouteAware  {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("New Employee"),

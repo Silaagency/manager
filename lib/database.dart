@@ -110,8 +110,8 @@ Future<(Employee, String)> login(String email, String password) async {
     } else {
       throw Exception('Failed to login');
     }
-  } catch (e) {
-    throw Exception('Error: $e');
+  } on Exception catch (e) {
+    throw Exception(e.toString().substring(11));
   }
 }
 

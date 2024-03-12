@@ -134,17 +134,18 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Register'),
+        title: const Text('Inscrivez-vous'),
       ),
       body: Center(
         
-        child: Container(
+        child: Card(
+          elevation: 5,
           color: AppColors.backgroundColor, 
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(26.0),
             child: SizedBox(
               width: 400,
               child:  Column(
@@ -176,7 +177,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   TextField(
                     controller: nameController,
                     decoration: InputDecoration(
-                    labelText: 'Name',
+                    labelText: 'Nom',
                     border: OutlineInputBorder(),
                     errorText: getGenericError(nameController),
                     ),    
@@ -196,7 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
-                      labelText: 'Phone',
+                      labelText: 'Numéro de téléphone',
                       border: const OutlineInputBorder(),
                       errorText: getGenericError(phoneController),
                     ),
@@ -206,7 +207,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: 'mot de passe',
                     border: const OutlineInputBorder(),
                     errorText: getGenericError(passwordController),
                     ),
@@ -221,7 +222,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                       ),
-                      child: const Text('Register'), // Button text
+                      child: const Text("S'inscrire"), // Button text
                     ),
                   )
                 ],

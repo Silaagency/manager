@@ -71,10 +71,10 @@ class _AdminEmployeesPageState extends State<AdminEmployeesPage> with RouteAware
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Employees'),
+        title: const Text('Employés'),
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),
@@ -88,11 +88,11 @@ class _AdminEmployeesPageState extends State<AdminEmployeesPage> with RouteAware
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home), 
-              label: 'All',
+              label: 'Tous',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              label: 'New',
+              label: 'Nouveaux',
             ),
           ],
           currentIndex: _selectedIndex,

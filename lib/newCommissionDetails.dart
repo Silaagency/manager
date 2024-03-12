@@ -79,7 +79,7 @@ class _NewCommissionDetailsPageState extends State<NewCommissionDetailsPage> wit
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Details"),

@@ -192,19 +192,19 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Confirm Payment'),
-            content: const Text('Are you sure you want to proceed with the payment?'),
+            title: const Text('Confirmer le payment'),
+            content: const Text('Êtes-vous sûr de vouloir procéder au paiement ?'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
+                child: const Text('Annuler'),
               ),
               TextButton(
                 onPressed:  () async{
                   await performPayment();
                   Navigator.pop(context);
                 },
-                child: const Text('Confirm'),
+                child: const Text('Confirmer'),
               ),
             ],
           );
@@ -221,7 +221,7 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Employee "),

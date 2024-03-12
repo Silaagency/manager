@@ -9,6 +9,7 @@ import 'package:flutter_application_1/adminEmployees.dart';
 import 'package:flutter_application_1/data.dart';
 import 'package:flutter_application_1/database.dart';
 import 'package:flutter_application_1/listPages.dart';
+import 'package:flutter_application_1/payments.dart';
 import 'constants.dart';
 import 'adminEmployeeDetails.dart';
 import 'data.dart';
@@ -147,10 +148,10 @@ class _EmployeeMainPageState extends State<EmployeeMainPage> with RouteAware  {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Employee Menu'),
+        title: const Text('Employé'),
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_alt_rounded),
@@ -192,22 +193,26 @@ class _EmployeeMainPageState extends State<EmployeeMainPage> with RouteAware  {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Salaire"),
-                              Text(
-                              salary.toString() + " DA",
-                              style: TextStyle(fontSize: 30),
-                              ),
-                            ],
-                          )
+                        child: GestureDetector(
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Salaire"),
+                                Text(
+                                salary.toString() + " DA",
+                                style: TextStyle(fontSize: 30),
+                                ),
+                              ],
+                            )
+                          ),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentPage(employee: widget.employee)));
+                          },
                         )
                       ),
-                      
                     ],
                   ),
                 )
@@ -216,7 +221,6 @@ class _EmployeeMainPageState extends State<EmployeeMainPage> with RouteAware  {
           ),
         )  
       )  // This trailing comma makes auto-formatting nicer for build methods.
-      
     );
   }
 }

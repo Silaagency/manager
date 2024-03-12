@@ -60,10 +60,10 @@ class _AdminMainPageState extends State<AdminMainPage> with RouteAware  {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff444444),
+      backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Main Menu'),
+        title: const Text('Menu'),
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),

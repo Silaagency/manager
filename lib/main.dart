@@ -63,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     loginWithId().then((value) {
       setState(() {
         sessionLoginState = value.$2;
+        employee = value.$1;
       });
       if (value.$2 == "admin") {
         Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminMainPage()));

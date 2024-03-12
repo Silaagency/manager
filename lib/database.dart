@@ -116,7 +116,7 @@ Future<(Employee, String)> login(String email, String password) async {
 }
 
 
-Future<(Employee, String)> loginWithId() async {
+Future<(Employee?, String)> loginWithId() async {
   final url = Uri.parse('$_baseUrl/login-session');
   final headers = {'Content-Type': 'application/json'};
   final body = json.encode({'email': await getEmail(), 'sessionId': await getSessionId()});
@@ -130,9 +130,9 @@ Future<(Employee, String)> loginWithId() async {
       final emp = Employee.fromJson(jsonResponse["employee"]);
       return (emp, identity as String);
     } else if (response.statusCode == 401) {
-      throw Exception('Invalid email or password');
+      return (null, "failed");
     } else {
-      throw Exception('Failed to login');
+      return (null, "failed");
     }
   } catch (e) {
     throw Exception('Error: $e');

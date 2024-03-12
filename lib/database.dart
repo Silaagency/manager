@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 String sessionId = "";
 String email = "";
 
-String _baseUrl = "http://localhost:3000";
+String _baseUrl = "manager-backend-self.vercel.app";
 
 Future<void> saveSessionIdAndEmail(String _sessionId, String _email) async {
   final prefs = await SharedPreferences.getInstance();
@@ -28,7 +28,7 @@ Future<String?> getEmail() async {
 
 
 Future<List<Service>> fetchServices() async {
-  final response = await http.get(Uri.parse('http://localhost:3000/services'));
+  final response = await http.get(Uri.parse('$_baseUrl/services'));
 
   if (response.statusCode == 200) {
     final services = (jsonDecode(response.body) as List)
@@ -42,7 +42,7 @@ Future<List<Service>> fetchServices() async {
 
 // Function to fetch a specific service by name
 Future<Service> fetchServiceByName(String name) async {
-  final response = await http.get(Uri.parse('http://localhost:3000/services/$name'));
+  final response = await http.get(Uri.parse('$_baseUrl/services/$name'));
 
   if (response.statusCode == 200) {
     final service = Service.fromJson(jsonDecode(response.body));
@@ -54,7 +54,7 @@ Future<Service> fetchServiceByName(String name) async {
 
 Future<Service> createService(Service service) async {
   final response = await http.post(
-    Uri.parse('http://localhost:3000/services'),
+    Uri.parse('$_baseUrl/services'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode({
       'name': service.name,
@@ -73,7 +73,7 @@ Future<Service> createService(Service service) async {
 
 Future<Service> updateService(String name, Service updatedService) async {
   final response = await http.put(
-    Uri.parse('http://localhost:3000/services/$name'),
+    Uri.parse('$_baseUrl/services/$name'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode({
       'newName' : updatedService.name,
@@ -91,7 +91,7 @@ Future<Service> updateService(String name, Service updatedService) async {
 }
 
 Future<(Employee, String)> login(String email, String password) async {
-  final url = Uri.parse('http://localhost:3000/login');
+  final url = Uri.parse('$_baseUrl/login');
   final headers = {'Content-Type': 'application/json'};
   final body = json.encode({'email': email, 'password': password});
 
@@ -117,7 +117,7 @@ Future<(Employee, String)> login(String email, String password) async {
 
 
 Future<(Employee, String)> loginWithId() async {
-  final url = Uri.parse('http://localhost:3000/login-session');
+  final url = Uri.parse('$_baseUrl/login-session');
   final headers = {'Content-Type': 'application/json'};
   final body = json.encode({'email': await getEmail(), 'sessionId': await getSessionId()});
 
@@ -140,7 +140,7 @@ Future<(Employee, String)> loginWithId() async {
 }
 
 Future<bool?> checkEmail(String _email) async {
-  final url = 'http://localhost:3000/email-used';
+  final url = '$_baseUrl/email-used';
   final headers = {'Content-Type': 'application/json'};
 
   try {
@@ -160,7 +160,7 @@ Future<bool?> checkEmail(String _email) async {
 }
 
 Future<bool?> checkName(String _email, String _name) async {
-  final url = 'http://localhost:3000/project-name-used';
+  final url = '$_baseUrl/project-name-used';
   final headers = {'Content-Type': 'application/json'};
 
   try {
@@ -180,7 +180,7 @@ Future<bool?> checkName(String _email, String _name) async {
 }
 
 Future<void> createNewEmployee(NewEmployeeInfo newEmployeeInfo) async {
-  final url = Uri.parse('http://localhost:3000/new-employees');
+  final url = Uri.parse('$_baseUrl/new-employees');
   final headers = {'Content-Type': 'application/json'};
 
   try {
@@ -202,7 +202,7 @@ Future<void> createNewEmployee(NewEmployeeInfo newEmployeeInfo) async {
 }
 
 Future<void> confirmEmployee(Employee employee) async {
-  final url = Uri.parse('http://localhost:3000/employees');
+  final url = Uri.parse('$_baseUrl/employees');
   final headers = {'Content-Type': 'application/json'};
 
   try {
@@ -225,7 +225,7 @@ Future<void> confirmEmployee(Employee employee) async {
 
 
 Future<List<EmployeeInfo>> fetchNewEmployees() async {
-  final response = await http.get(Uri.parse('http://localhost:3000/new-employees'));
+  final response = await http.get(Uri.parse('$_baseUrl/new-employees'));
 
   if (response.statusCode == 200) {
     final jsonBody = json.decode(response.body);
@@ -239,7 +239,7 @@ Future<List<EmployeeInfo>> fetchNewEmployees() async {
 Future<List<Employee>> fetchEmployees({
   Map<String, String>? filters,
 }) async {
-  final uri = Uri.parse('http://localhost:3000/employees').replace(
+  final uri = Uri.parse('$_baseUrl/employees').replace(
     queryParameters: filters,
   );
   final response = await http.get(uri);
@@ -253,7 +253,7 @@ Future<List<Employee>> fetchEmployees({
 }
 
 Future<Employee> fetchEmployeeByEmail(String email) async {
-  final response = await http.get(Uri.parse('http://localhost:3000/employees/$email'));
+  final response = await http.get(Uri.parse('$_baseUrl/employees/$email'));
 
   if (response.statusCode == 200) {
     final employee = Employee.fromJson(jsonDecode(response.body));
@@ -265,7 +265,7 @@ Future<Employee> fetchEmployeeByEmail(String email) async {
 
 Future<Employee> updateEmployee(String email, Employee updatedEmployee) async {
   final response = await http.put(
-    Uri.parse('http://localhost:3000/employees/$email'),
+    Uri.parse('$_baseUrl/employees/$email'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode({
       'employeeInfo' : updatedEmployee.employeeInfo,
@@ -284,7 +284,7 @@ Future<Employee> updateEmployee(String email, Employee updatedEmployee) async {
 
 Future<Commission> createCommission(Commission commission) async {
   final response = await http.post(
-    Uri.parse('http://localhost:3000/commissions'),
+    Uri.parse('$_baseUrl/commissions'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode(commission.toJson()),
   );

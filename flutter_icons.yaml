@@ -1,0 +1,5 @@
+flutter_icons:
+  android: true # Generate icons for Android
+  ios: true # Generate icons for iOS
+  remove_alpha_ios: true # Remove alpha channel from iOS icons
+  image_path: "assets/icon.svg" # Path to your vector icon file

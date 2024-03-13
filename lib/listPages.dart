@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/addEmployee.dart';
-import 'package:flutter_application_1/adminEmployeeDetails.dart';
-import 'package:flutter_application_1/commissionDetails.dart';
-import 'package:flutter_application_1/data.dart';
-import 'package:flutter_application_1/database.dart';
-import 'package:flutter_application_1/employeeMain.dart';
-import 'package:flutter_application_1/newCommissionDetails.dart';
+import 'package:Manager/addEmployee.dart';
+import 'package:Manager/adminEmployeeDetails.dart';
+import 'package:Manager/commissionDetails.dart';
+import 'package:Manager/data.dart';
+import 'package:Manager/database.dart';
+import 'package:Manager/employeeMain.dart';
+import 'package:Manager/newCommissionDetails.dart';
 import 'constants.dart';
 import 'package:intl/intl.dart';
 

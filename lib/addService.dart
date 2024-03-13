@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/data.dart';
-import 'package:flutter_application_1/database.dart';
+import 'package:Manager/data.dart';
+import 'package:Manager/database.dart';
 import 'constants.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 

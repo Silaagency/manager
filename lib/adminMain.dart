@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/addService.dart';
-import 'package:flutter_application_1/adminEmployees.dart';
-import 'package:flutter_application_1/commercial.dart';
-import 'package:flutter_application_1/data.dart';
-import 'package:flutter_application_1/database.dart';
-import 'package:flutter_application_1/service.dart';
+import 'package:Manager/addService.dart';
+import 'package:Manager/adminEmployees.dart';
+import 'package:Manager/commercial.dart';
+import 'package:Manager/data.dart';
+import 'package:Manager/database.dart';
+import 'package:Manager/service.dart';
 import 'constants.dart';
 
 class AdminMainPage extends StatefulWidget {
@@ -66,7 +66,7 @@ class _AdminMainPageState extends State<AdminMainPage> with RouteAware  {
         title: Text('Menu'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert),
+            icon: const Icon(Icons.add),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const AddServicePage()));
             },

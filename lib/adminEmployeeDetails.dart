@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/addEmployee.dart';
-import 'package:flutter_application_1/addService.dart';
-import 'package:flutter_application_1/adminEmployees.dart';
-import 'package:flutter_application_1/data.dart';
-import 'package:flutter_application_1/database.dart';
-import 'package:flutter_application_1/listPages.dart';
-import 'package:flutter_application_1/payments.dart';
+import 'package:Manager/addEmployee.dart';
+import 'package:Manager/addService.dart';
+import 'package:Manager/adminEmployees.dart';
+import 'package:Manager/data.dart';
+import 'package:Manager/database.dart';
+import 'package:Manager/listPages.dart';
+import 'package:Manager/payments.dart';
 import 'constants.dart';
 
 

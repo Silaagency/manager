@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/addEmployee.dart';
-import 'package:flutter_application_1/addService.dart';
-import 'package:flutter_application_1/adminEmployeeDetails.dart';
-import 'package:flutter_application_1/data.dart';
+import 'package:Manager/addEmployee.dart';
+import 'package:Manager/addService.dart';
+import 'package:Manager/adminEmployeeDetails.dart';
+import 'package:Manager/data.dart';
 import 'constants.dart';
 import 'listPages.dart';
 
@@ -74,15 +74,7 @@ class _AdminEmployeesPageState extends State<AdminEmployeesPage> with RouteAware
       backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Employés', style: defaultTextStyle),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const AddServicePage()));
-            },
-          ),
-        ],
+        title: Text('Employés'),
       ),
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[

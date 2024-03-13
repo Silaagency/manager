@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/adminMain.dart';
-import 'package:flutter_application_1/database.dart';
-import 'package:flutter_application_1/employeeMain.dart';
-import 'package:flutter_application_1/register.dart';
+import 'package:Manager/adminMain.dart';
+import 'package:Manager/database.dart';
+import 'package:Manager/employeeMain.dart';
+import 'package:Manager/register.dart';
 import 'constants.dart';
 import 'data.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Manager',
       theme: ThemeData(
         textTheme: TextTheme(
           bodyLarge: defaultTextStyle,

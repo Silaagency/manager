@@ -255,7 +255,7 @@ class _AddCommissionPageState extends State<AddCommissionPage> {
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                           ),
-                          child: const Text('Save'), // Button text
+                          child: Text('Save', style: defaultTextStyle), // Button text
                         )
                       ) 
                     ],

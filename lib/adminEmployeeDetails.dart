@@ -192,19 +192,19 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Confirmer le payment'),
-            content: const Text('Êtes-vous sûr de vouloir procéder au paiement ?'),
+            title: Text('Confirmer le payment'),
+            content: Text('Êtes-vous sûr de vouloir procéder au paiement?'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Annuler'),
+                child: Text('Annuler'),
               ),
               TextButton(
                 onPressed:  () async{
                   await performPayment();
                   Navigator.pop(context);
                 },
-                child: const Text('Confirmer'),
+                child: Text('Confirmer'),
               ),
             ],
           );
@@ -224,7 +224,7 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
       backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Employee "),
+        title: Text("Employee"),
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_alt_rounded),
@@ -342,18 +342,15 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
                                       ).then((value) {
                                         if (value != null && value != 0) {
                                           verser(value);
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text('Vous avez verser: $value DA')),
-                                          );
                                         }
                                       });
                                     },
                                     style: ButtonStyle(
                                       backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                                     ),
-                                    child: const Text(
+                                    child: Text(
                                       'Verser',
-                                      style: TextStyle(fontSize: 20),
+                                      style: defaultTextStyle,
                                     ), // Button text
                                   ),
                                 ),
@@ -414,8 +411,7 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
                                       child: FittedBox(
                                         fit: BoxFit.fitWidth,
                                         child: Text(
-                                          'Absence (' + (employee?.paymentInfo.absence.toString() ?? '0') + ')',
-                                          style: TextStyle(fontSize: 16),
+                                          'Absence (' + (employee?.paymentInfo.absence.toString() ?? '0') + ')', style: defaultTextStyle
                                         ),
                                       )
                                     ),

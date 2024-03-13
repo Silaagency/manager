@@ -222,7 +222,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                       ),
-                      child: const Text("S'inscrire"), // Button text
+                      child: Text("S'inscrire", style: defaultTextStyle), // Button text
                     ),
                   )
                 ],

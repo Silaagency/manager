@@ -63,7 +63,7 @@ class _AdminMainPageState extends State<AdminMainPage> with RouteAware  {
       backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Menu'),
+        title: Text('Menu'),
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),
@@ -97,7 +97,7 @@ class _AdminMainPageState extends State<AdminMainPage> with RouteAware  {
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                           ),
-                          child: const Text('Employés', style: TextStyle(fontSize: 20)), // Button text
+                          child: Text('Employés', style: defaultTextStyle), // Button text
                         ),
                       ),
                       SizedBox(height: 20),
@@ -110,7 +110,7 @@ class _AdminMainPageState extends State<AdminMainPage> with RouteAware  {
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                           ),
-                          child: const Text('Commercial', style: TextStyle(fontSize: 20)), // Button text
+                          child: Text('Commercial', style: defaultTextStyle), // Button text
                         ),
                       ),
                       ListView.builder(
@@ -129,7 +129,7 @@ class _AdminMainPageState extends State<AdminMainPage> with RouteAware  {
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                                 ),
-                                child: Text(serviceNames[index], style: TextStyle(fontSize: 20)), // Button text
+                                child: Text(serviceNames[index], style: defaultTextStyle), // Button text
                               ),
                             )
                           );

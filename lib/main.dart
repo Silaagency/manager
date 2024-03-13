@@ -21,7 +21,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
+        textTheme: TextTheme(
+          bodyLarge: defaultTextStyle,
+          bodyMedium: defaultTextStyle,
+          bodySmall: defaultTextStyle
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -150,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)
                             
                           ),
-                          child: const Text('Se onnectez'), // Button text
+                          child: Text('Se connectez', style: defaultTextStyle,), // Button text
                         ),
                       )
                       ,
@@ -164,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                           ),
-                          child: const Text('Incrivez-vous'), // Button text
+                          child: Text('Incrivez-vous', style: defaultTextStyle), // Button text
                         ),
                       )
                     ],

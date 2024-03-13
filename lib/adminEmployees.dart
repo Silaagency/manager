@@ -74,7 +74,7 @@ class _AdminEmployeesPageState extends State<AdminEmployeesPage> with RouteAware
       backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Employés'),
+        title: Text('Employés', style: defaultTextStyle),
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),

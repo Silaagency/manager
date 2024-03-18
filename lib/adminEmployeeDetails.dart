@@ -78,9 +78,9 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
 
   }
 
-  void verser(int amount)
+  void verser(int amount, String comment)
   {
-    Payment payment = Payment(employee: employee!.employeeInfo.email, date: DateTime.now(), amount: amount);
+    Payment payment = Payment(employee: employee!.employeeInfo.email, comment: comment, date: DateTime.now(), amount: amount);
     createPayment(payment).then((value) => updateState());
   }
 
@@ -308,17 +308,33 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
                                         context: context,
                                         builder: (BuildContext context) {
                                           TextEditingController versementController = TextEditingController();
+                                          TextEditingController commentController = TextEditingController();
                                           return AlertDialog(
                                             title: Text('Versement'),
-                                            content: TextField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                              controller: versementController,
-                                              decoration: InputDecoration(
-                                                hintText: 'Entrer le montant',
-                                                suffixText: 'DA',
+                                            content: Container(
+                                              width: 200,
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  TextField(
+                                                    keyboardType: TextInputType.number,
+                                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                                    controller: versementController,
+                                                    decoration: InputDecoration(
+                                                      hintText: 'Entrer le montant',
+                                                      suffixText: 'DA',
+                                                    ),
+                                                  ),
+                                                  TextField(
+                                                    controller: commentController,
+                                                    decoration: InputDecoration(
+                                                      hintText: 'Commentaire',
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
+                                            
                                             actions: [
                                               TextButton(
                                                 child: Text('Annuler'),
@@ -330,10 +346,11 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
                                                 child: Text('Confirmer'),
                                                 onPressed: () {
                                                   final text = versementController.text;
+                                                  final comment = commentController.text;
                                                   int res = 0;
                                                   if (text != "")
                                                     res = int.parse(text);
-                                                  Navigator.of(context).pop(res);
+                                                  Navigator.of(context).pop((res, "fezfez"));
                                                 },
                                               ),
                                             ],
@@ -341,7 +358,7 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
                                         },
                                       ).then((value) {
                                         if (value != null && value != 0) {
-                                          verser(value);
+                                          verser(value.$1, value.$2);
                                         }
                                       });
                                     },

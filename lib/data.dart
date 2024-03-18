@@ -346,17 +346,20 @@ class PaymentDetails {
 class Payment {
   Payment({
     required this.employee,
+    required this.comment,
     required this.date,
     required this.amount,
   });
 
   final String employee;
+  final String comment;
   final DateTime date;
   final int amount;
 
   factory Payment.fromJson(Map<String, dynamic> json) {
     return Payment(
       employee: json['employee'],
+      comment: json['comment'],
       date: DateTime.parse(json['date']),
       amount: json['amount'],
     );
@@ -365,6 +368,7 @@ class Payment {
   Map<String, dynamic> toJson() {
     return {
       'employee': employee,
+      'comment': comment,
       'date': date.toIso8601String(),
       'amount': amount,
     };

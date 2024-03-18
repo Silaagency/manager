@@ -74,75 +74,84 @@ class _AdminMainPageState extends State<AdminMainPage> with RouteAware  {
         ],
       ),
       body: Center(
-        child: Card(
-          color: AppColors.backgroundColor,
-          child: Padding(
-            padding: EdgeInsets.only(top: 20, bottom: 20, right: 10, left: 10),
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SizedBox(
-                  width: 400,
-                  child:  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminEmployeesPage()));
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
-                          ),
-                          child: Text('Employés', style: defaultTextStyle), // Button text
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => CommercialPage()));
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
-                          ),
-                          child: Text('Commercial', style: defaultTextStyle), // Button text
-                        ),
-                      ),
-                      ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: serviceNames.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: SizedBox(
-                              height: 50,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ServicePage(service: serviceNames[index])));
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                Card(
+                  color: AppColors.backgroundColor,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20, bottom: 20, right: 10, left: 10),
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: SizedBox(
+                          width: 400,
+                          child:  Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 50,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminEmployeesPage()));
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
+                                  ),
+                                  child: Text('Employés', style: defaultTextStyle), // Button text
                                 ),
-                                child: Text(serviceNames[index], style: defaultTextStyle), // Button text
                               ),
-                            )
-                          );
-                        },
-                      ),
-                    ],
+                              SizedBox(height: 20),
+                              SizedBox(
+                                height: 50,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => CommercialPage()));
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
+                                  ),
+                                  child: Text('Commercial', style: defaultTextStyle), // Button text
+                                ),
+                              ),
+                              ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: serviceNames.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: SizedBox(
+                                      height: 50,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => ServicePage(service: serviceNames[index])));
+                                        },
+                                        style: ButtonStyle(
+                                          backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
+                                        ),
+                                        child: Text(serviceNames[index], style: defaultTextStyle), // Button text
+                                      ),
+                                    )
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ) 
                   ),
-                ),
-              )
-            ) 
+                )
+              ],
+            )
+            
           ),
         )
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      )
     );
   }
 }

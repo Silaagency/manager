@@ -92,7 +92,7 @@ class _ServicePageState extends State<ServicePage> with RouteAware  {
             icon: const Icon(Icons.settings),
             onPressed: () async {
               final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddServicePage(service: service,)));
-              service!.name = result;
+              service!.name = result?? service!.name;
               updateState();
             },
           ),
@@ -101,7 +101,7 @@ class _ServicePageState extends State<ServicePage> with RouteAware  {
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home), 
+              icon: Icon(Icons.home),
               label: 'Employees',
             ),
             BottomNavigationBarItem(

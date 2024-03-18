@@ -56,11 +56,23 @@ class _PaymentPageState extends State<PaymentPage> with RouteAware  {
   @override
   void initState() {
     super.initState();
-    list = PaymentListPage(employee: widget.employee.employeeInfo.email);
+    list = [
+      PaymentListPage(employee: widget.employee.employeeInfo.email),
+      VersementListPage(employee: widget.employee.employeeInfo.email)
+    ];
     
   }
 
-  Widget? list;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+
+  List<Widget>? list;
+  int _selectedIndex = 0;
+  final PageStorageBucket _bucket = PageStorageBucket();
 
   @override
   Widget build(BuildContext context) {
@@ -74,19 +86,36 @@ class _PaymentPageState extends State<PaymentPage> with RouteAware  {
           
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.payments_rounded), 
+            label: 'Payments',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.payments_outlined),
+            label: 'Versements',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: _onItemTapped,
+      ),
       body: Center(
         child: Container(
-        width: 450,
-          color: Colors.white,
-          child: Column (
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(child: list!) ,
-              
-            ],
-          ),
-        )  
+          height: double.infinity,
+          color: AppColors.backgroundColor,
+          child: IndexedStack(
+            index: _selectedIndex,
+            children: list!.map((Widget widget) {
+              return PageStorage(
+                key: PageStorageKey(widget),
+                bucket: _bucket,
+                child: widget,
+              );
+            }).toList(),
+          ) 
+        ), 
       )  // This trailing comma makes auto-formatting nicer for build methods.
       
     );

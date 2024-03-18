@@ -61,7 +61,7 @@ class _AdminEmployeesPageState extends State<AdminEmployeesPage> with RouteAware
     });
   }
 
-    static List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     EmployeeListPage(isNew: false), // Example widget for the Home Page
     EmployeeListPage(isNew: true), // Example widget for the Search Page
   ];
@@ -77,20 +77,20 @@ class _AdminEmployeesPageState extends State<AdminEmployeesPage> with RouteAware
         title: Text('Employés'),
       ),
       bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home), 
-              label: 'Tous',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Nouveaux',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blue,
-          onTap: _onItemTapped,
-        ),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home), 
+            label: 'Tous',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Nouveaux',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: _onItemTapped,
+      ),
       body: Center(
         child: Container(
           height: double.infinity,

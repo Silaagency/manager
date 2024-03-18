@@ -489,7 +489,6 @@ class _NewCommissionListPageState extends State<NewCommissionListPage> {
                                             ],
                                           ),
                                         )
-                                        
                                       ),
                                       Expanded(
                                         child:  Padding(
@@ -584,109 +583,246 @@ class _PaymentListPageState extends State<PaymentListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return /*Center(
-      child:*/ Container(
-        color: AppColors.backgroundColor,
-        width: 450,
-        child: SingleChildScrollView(
-          child: Center(
-            child: Container(
-              color: AppColors.backgroundColor,
-              child: Padding(
-                padding: const EdgeInsets.only( right: 20, left: 20),
-                child: SizedBox(
-                  width: 400,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: payments.length,
-                        itemBuilder: (context, index) {
-                          return  GestureDetector(
-                            onTap: () {/*
-                              Widget? w = context.findAncestorWidgetOfExactType<EmployeeMainPage>();
-                              if (w == null)
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => CommissionDetailsPage(commission: commissions[index])));
-                          */},
-                            child: Card(
-                              elevation: 5,
-                              color: AppColors.backgroundColor3,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    SizedBox(
-                                      height: 30,
-                                        child: Center(
-                                          child: Text(
-                                            DateFormat('yyyy-MM-dd HH:mm:ss').format(payments[index].date)
-                                        ),
-                                      ) 
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: Padding(
-                                            padding: EdgeInsets.only(left: 30),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Salaire: " + payments[index].details.salary.toString() + " DA",
-                                                ),
-                                                Text(
-                                                  "Commissions: " + payments[index].details.commissions.toString() + " DA",
-                                                ),
-                                                Text("prépayée: " + payments[index].details.prepaid.toString() + " DA"),
-                                                Text("pénalité: " + payments[index].details.penalty.toString() + "DA"),
-                                              ],
-                                            ),
-                                          )
-                                          
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Padding(
-                                            padding: EdgeInsets.only(left: 30),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  payments[index].details.payed.toString() + " DA",
-                                                  style: TextStyle(fontSize: 25),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        )
-                                      ],
+    return Container(
+      color: AppColors.backgroundColor,
+      width: 450,
+      child: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            color: AppColors.backgroundColor,
+            child: Padding(
+              padding: const EdgeInsets.only( right: 20, left: 20),
+              child: SizedBox(
+                width: 400,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: payments.length,
+                      itemBuilder: (context, index) {
+                        return  GestureDetector(
+                          onTap: () {/*
+                            Widget? w = context.findAncestorWidgetOfExactType<EmployeeMainPage>();
+                            if (w == null)
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => CommissionDetailsPage(commission: commissions[index])));
+                        */},
+                          child: Card(
+                            elevation: 5,
+                            color: AppColors.backgroundColor3,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                      child: Center(
+                                        child: Text(
+                                          DateFormat('yyyy-MM-dd HH:mm:ss').format(payments[index].date)
+                                      ),
                                     ) 
-                                  ],
-                                ),
-                              )
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(left: 30),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Salaire: " + payments[index].details.salary.toString() + " DA",
+                                              ),
+                                              Text(
+                                                "Commissions: " + payments[index].details.commissions.toString() + " DA",
+                                              ),
+                                              Text("prépayée: " + payments[index].details.prepaid.toString() + " DA"),
+                                              Text("pénalité: " + payments[index].details.penalty.toString() + "DA"),
+                                            ],
+                                          ),
+                                        )
+                                        
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(left: 30),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                payments[index].details.payed.toString() + " DA",
+                                                style: TextStyle(fontSize: 25),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      )
+                                    ],
+                                  ) 
+                                ],
+                              ),
                             )
-                          ); 
-                        },
-                      ),
-                    ],
-                  ),
+                          )
+                        ); 
+                      },
+                    ),
+                  ],
                 ),
-              )
-            ) 
-          ), 
-        ),
-      )
-   /* )*/;
+              ),
+            )
+          ) 
+        ), 
+      ),
+    );
+  }
+}
+
+class VersementListPage extends StatefulWidget{
+  VersementListPage({super.key, this.employee});
+
+  final String? employee;
+  _VersementListPageState? state = null;
+
+  @override
+  State<VersementListPage> createState() {
+    state = _VersementListPageState();
+    return state!;
+  }
+
+
+  void updateData({Filter? queryFilter}){
+    state!.rebuild(queryFilter);
+  }
+}
+
+
+class _VersementListPageState extends State<VersementListPage> {
+  
+  List<Payment> payments = List.empty();
+
+  @override
+  void initState() {
+    updateData();
+  }
+
+  // this may cause a problem if one of the lists is empty, not sure, depends on List methods returned value when list is empty
+  void updateData(){
     
+    Map<String, String> filters = Map<String, String>();
     
+    filters["employee"] = widget.employee??"";
     
+    getPayments(filters: filters).then((value) {
+      setState(() {
+        payments = value;
+      });
+    });
+  }
+
+  void rebuild(Filter? queryFilter_) {
+    updateData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColors.backgroundColor,
+      width: 450,
+      child: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            color: AppColors.backgroundColor,
+            child: Padding(
+              padding: const EdgeInsets.only( right: 20, left: 20),
+              child: SizedBox(
+                width: 400,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: payments.length,
+                      itemBuilder: (context, index) {
+                        return  GestureDetector(
+                          onTap: () {/*
+                            Widget? w = context.findAncestorWidgetOfExactType<EmployeeMainPage>();
+                            if (w == null)
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => CommissionDetailsPage(commission: commissions[index])));
+                        */},
+                          child: Card(
+                            elevation: 5,
+                            color: AppColors.backgroundColor3,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                      child: Center(
+                                        child: Text(
+                                          DateFormat('yyyy-MM-dd HH:mm:ss').format(payments[index].date)
+                                      ),
+                                    ) 
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(left: 30),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(payments[index].comment.toString()),
+                                            ],
+                                          ),
+                                        )
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(left: 30),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                payments[index].amount.toString() + " DA",
+                                                style: TextStyle(fontSize: 25),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      )
+                                    ],
+                                  ) 
+                                ],
+                              ),
+                            )
+                          )
+                        ); 
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ) 
+        ), 
+      ),
+    );
   }
 }

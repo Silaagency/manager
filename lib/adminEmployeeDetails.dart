@@ -24,7 +24,7 @@ class AdminEmployeeDetailsPage extends StatefulWidget {
 class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> with RouteAware  {
 
   Employee? employee;
-  bool isPoped = false;
+
   
   TextEditingController absenceController = TextEditingController();
 
@@ -37,15 +37,11 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
   @override
   void dispose() {
     routeObserver.unsubscribe(this);
-    isPoped = true;
     super.dispose();
   }
 
   // Called when the top route has been popped off, and the current route shows up.
-  void didPopNext() {
-    if (!isPoped)
-      updateState();
-  }
+
 
   void updateState()
   {
@@ -248,15 +244,15 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
             onPressed: () async {
               final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddEmployeePage(employee: employee?.employeeInfo??widget.employee, op: Operation.Edit)));
               if (result != null)
+              {
                 if (result as String == "deleted")
-                {
-                  isPoped = true;
                   Navigator.pop(context);
-                }
+              }
+              else
+                updateState();
             },
           ),
         ],
-        
       ),
       
       body: Center(

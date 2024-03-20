@@ -52,6 +52,17 @@ Future<Service> fetchServiceByName(String name) async {
   }
 }
 
+Future<Service> deleteServiceByName(String name) async {
+  final response = await http.delete(Uri.parse('$_baseUrl/services/$name'));
+
+  if (response.statusCode == 200) {
+    final service = Service.fromJson(jsonDecode(response.body));
+    return service;
+  } else {
+    throw Exception('Failed to fetch service');
+  }
+}
+
 Future<Service> createService(Service service) async {
   final response = await http.post(
     Uri.parse('$_baseUrl/services'),

@@ -133,6 +133,32 @@ class _AddServicePageeState extends State<AddServicePage> {
     return;
   }
 
+  Future<void> _handlePayButtonPressed() async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirmer'),
+          content: Text('Êtes-vous sûr de vouloir suprimer ce service?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Annuler'),
+            ),
+            TextButton(
+              onPressed: () async {
+                await deleteServiceByName(widget.service!.name);
+                Navigator.pop(context);
+              },
+              child: Text('Confirmer'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -141,7 +167,18 @@ class _AddServicePageeState extends State<AddServicePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Ajouter un service'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete),
+            tooltip: 'Suprimer',
+            onPressed: () async {
+              await _handlePayButtonPressed();
+              Navigator.pop(context, "");
+            },
+          ),
+        ],
       ),
+      
       body: Center(
         child: SingleChildScrollView(
           child: Center(

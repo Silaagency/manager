@@ -55,6 +55,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  bool canPress = true;
   String sessionLoginState = "waiting";
   Employee? employee;
 
@@ -144,22 +146,36 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       const SizedBox(height: 40),
-                      SizedBox( 
+                      SizedBox(
                         height: 40,
                         child: ElevatedButton(
-                          onPressed: () {
-                            processInput();
-                          },
+                          
+                          onPressed: canPress ? () {
+                            setState(() {
+                              canPress = false;
+                            });
+                            processInput().then((value) {
+                              setState(() {
+                                canPress = true;
+                              });
+                            });
+                          } : null,
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)
-                            
                           ),
-                          child: Text('Se connectez', style: defaultTextStyle,), // Button text
+                          child: !canPress ?
+                            Center(
+                              child: Container(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(),
+                              ),
+                            ):
+                            Text('Se connectez', style: defaultTextStyle,),
                         ),
-                      )
-                      ,
+                      ),
                       const SizedBox(height: 20),
-                      Container( 
+                      Container(
                         height: 40,
                         child: ElevatedButton(
                           onPressed: () {

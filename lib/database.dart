@@ -274,6 +274,19 @@ Future<Employee> fetchEmployeeByEmail(String email) async {
   }
 }
 
+Future<Employee> deleteEmployeeByEmail(String email) async {
+  final response = await http.delete(Uri.parse('$_baseUrl/employees/$email'));
+
+  if (response.statusCode == 200) {
+    final employee = Employee.fromJson(jsonDecode(response.body));
+    return employee;
+  } else if (response.statusCode == 401){
+    throw Exception('Cannot delete an admin');
+  } else {
+    throw Exception(response.body);
+  }
+}
+
 Future<Employee> updateEmployee(String email, Employee updatedEmployee) async {
   final response = await http.put(
     Uri.parse('$_baseUrl/employees/$email'),

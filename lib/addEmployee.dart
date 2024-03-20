@@ -136,6 +136,31 @@ class _AddEmployeePageState extends State<AddEmployeePage> with RouteAware  {
       } 
     }
   }
+  
+  Future<void> _handleDeleteButtonPressed() async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirmer'),
+          content: Text('Êtes-vous sûr de vouloir suprimer cet employee?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Annuler'),
+            ),
+            TextButton(
+              onPressed: () async {
+                await deleteEmployeeByEmail(widget.employee.email);
+                Navigator.pop(context);
+              },
+              child: Text('Confirmer'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +170,16 @@ class _AddEmployeePageState extends State<AddEmployeePage> with RouteAware  {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("New Employee"),
+        actions: (widget.op == Operation.Add)?null:[
+          IconButton(
+            icon: const Icon(Icons.delete),
+            tooltip: 'Suprimer',
+            onPressed: () async {
+              await _handleDeleteButtonPressed();
+              Navigator.pop(context, "deleted");
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Container(

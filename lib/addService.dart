@@ -133,7 +133,7 @@ class _AddServicePageeState extends State<AddServicePage> {
     return;
   }
 
-  Future<void> _handlePayButtonPressed() async {
+  Future<void> _handleDeleteButtonPressed() async {
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -167,12 +167,12 @@ class _AddServicePageeState extends State<AddServicePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Ajouter un service'),
-        actions: [
+        actions: (widget.service==null)?null:[
           IconButton(
             icon: const Icon(Icons.delete),
             tooltip: 'Suprimer',
             onPressed: () async {
-              await _handlePayButtonPressed();
+              await _handleDeleteButtonPressed();
               Navigator.pop(context, "");
             },
           ),

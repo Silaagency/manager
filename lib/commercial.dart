@@ -81,14 +81,6 @@ class _CommercialPageState extends State<CommercialPage> with RouteAware  {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Employees'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const AddServicePage()));
-            },
-          ),
-        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[

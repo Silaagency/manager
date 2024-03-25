@@ -109,15 +109,15 @@ Future<(Employee, String)> login(String email, String password) async {
   try {
     final response = await http.post(url, headers: headers, body: body);
 
+    final jsonResponse = json.decode(response.body);
     if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
       final sessionId = jsonResponse['sessionId'];
       final identity = jsonResponse['identity'];
       await saveSessionIdAndEmail(sessionId, email);
       final emp = Employee.fromJson(jsonResponse["employee"]);
       return (emp, identity as String);
     } else if (response.statusCode == 401) {
-      throw Exception('Invalid email or password');
+      throw Exception(jsonResponse["error"]);
     } else {
       throw Exception('Failed to login');
     }

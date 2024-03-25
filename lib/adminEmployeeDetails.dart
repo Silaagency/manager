@@ -1,3 +1,4 @@
+import 'package:async_button/async_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -173,14 +174,16 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
   Future<void> performPayment() async {
     final payment = (await calculateSalary(employee!, DateTime.now())).$2;
 
-    createFinalPayment(
+    await createFinalPayment(
       FinalPayment(
         employee: employee!.employeeInfo.email,
         date: DateTime.now(),
         amount: payment.payed,
         details: payment
       )
-    ).then((value) => updateState());
+    );
+
+    updateState();
   }
 
   void _handlePayButtonPressed() {
@@ -197,10 +200,17 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
                 onPressed: () => Navigator.pop(context),
                 child: Text('Annuler'),
               ),
-              TextButton(
-                onPressed:  () async{
-                  await performPayment();
-                  Navigator.pop(context);
+              AsyncTextBtn.withDefaultStyles(
+                asyncBtnStatesController: btnStateController,
+                onPressed: () async{
+                  try {
+                    btnStateController.update(AsyncBtnState.loading);
+                    await performPayment();
+                    Navigator.pop(context);
+
+                  } catch (e) {
+                    btnStateController.update(AsyncBtnState.idle);
+                  }
                 },
                 child: Text('Confirmer'),
               ),
@@ -213,6 +223,7 @@ class _AdminEmployeeDetailsPageState extends State<AdminEmployeeDetailsPage> wit
     }
   }
 
+  AsyncBtnStatesController btnStateController = AsyncBtnStatesController();
 
   @override
   Widget build(BuildContext context) {

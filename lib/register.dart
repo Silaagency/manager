@@ -227,7 +227,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   await processInput();
                                   btnStateController.update(AsyncBtnState.idle);
                                 } catch(e) {
-                                  btnStateController.update(AsyncBtnState.failure);
+                                  btnStateController.update(AsyncBtnState.idle);
                                 }
                               },
                               style: ButtonStyle(

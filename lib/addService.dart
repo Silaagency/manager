@@ -1,3 +1,4 @@
+import 'package:async_button/async_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -60,7 +61,7 @@ class _AddServicePageeState extends State<AddServicePage> {
     }
   }
 
-  void processInput()
+  Future<void> processInput() async
   {
     int fieldCount = 2 + (2 * textControllers.length);
     int validFields = 0;
@@ -110,15 +111,15 @@ class _AddServicePageeState extends State<AddServicePage> {
       try {
         if (widget.service == null)
         {
-          createService(service).then((value) => {Navigator.pop(context)});
+          await createService(service).then((value) => {Navigator.pop(context)});
           showToast("service created", context:context);
           //Data.services.add();
         }
         // modify service
         else
         {
-          updateService(widget.service!.name, service).then((value) => {
-            Navigator.pop(context, service.name)
+          await updateService(widget.service!.name, service).then((value) => {
+          Navigator.pop(context, service.name)
           });
           showToast("service updated", context:context);
         }
@@ -158,6 +159,7 @@ class _AddServicePageeState extends State<AddServicePage> {
     );
   }
 
+  AsyncBtnStatesController btnStateController = AsyncBtnStatesController();
 
   @override
   Widget build(BuildContext context) {
@@ -305,9 +307,15 @@ class _AddServicePageeState extends State<AddServicePage> {
                       const SizedBox(height: 25),
                       SizedBox(
                         height: 40,
-                        child: ElevatedButton(
-                          onPressed: () => {
-                            processInput()
+                        child: AsyncElevatedBtn.withDefaultStyles(
+                          asyncBtnStatesController: btnStateController,
+                          onPressed: () async {
+                            try {
+                              btnStateController.update(AsyncBtnState.loading);
+                              await processInput();
+                            } catch (e) {
+                              btnStateController.update(AsyncBtnState.idle);
+                            }
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  

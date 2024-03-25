@@ -1,3 +1,4 @@
+import 'package:async_button/async_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -69,7 +70,7 @@ class _AddCommissionPageState extends State<AddCommissionPage> {
     return null;
   }
 
-  void processInput()
+  Future<void> processInput() async
   {
     int fieldCount = 5;
     int validFields = 0;
@@ -121,17 +122,16 @@ class _AddCommissionPageState extends State<AddCommissionPage> {
         status: Status.notPayed
       );
       
-      createCommission(commission).then((value) {
-          Navigator.pop(context);
-      });
-
-      //Data.commissions.add(commission);
+      await createCommission(commission);
+      Navigator.pop(context);
 
       return ;
     }
 
     return ;
   }
+
+  AsyncBtnStatesController btnStateController = AsyncBtnStatesController();
 
   @override
   Widget build(BuildContext context) {
@@ -248,15 +248,21 @@ class _AddCommissionPageState extends State<AddCommissionPage> {
                       const SizedBox(height: 25),
                       SizedBox(
                         height: 40,
-                        child: ElevatedButton(
-                          onPressed: () => {
-                            processInput()
+                        child: AsyncElevatedBtn.withDefaultStyles(
+                          asyncBtnStatesController: btnStateController,
+                          onPressed: () async {
+                            try {
+                              btnStateController.update(AsyncBtnState.loading);
+                              await processInput();
+                            } catch (e) {
+                              btnStateController.update(AsyncBtnState.idle);
+                            }
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
                           ),
-                          child: Text('Save', style: defaultTextStyle), // Button text
-                        )
+                          child: Text('Confirmer', style: defaultTextStyle), // Button text
+                        ),
                       ) 
                     ],
                   ),

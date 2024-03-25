@@ -1,3 +1,4 @@
+import 'package:async_button/async_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -73,7 +74,7 @@ class _AddEmployeePageState extends State<AddEmployeePage> with RouteAware  {
 
   }
 
-  void processInput()
+  Future<void> processInput() async
   {
     int salary = 0;
    
@@ -86,14 +87,14 @@ class _AddEmployeePageState extends State<AddEmployeePage> with RouteAware  {
       if (salaryController.text.isNotEmpty) {
         salary = int.parse(salaryController.text);
       }
-      else return;
+      else Future.value();
         
     } else if (!paidCommissions)
     {
       // print toast
       showToast("You must choose a payment method", context:context);
 
-      return;
+      return Future.value();
     }
     
     Employee emp = Employee(
@@ -109,15 +110,15 @@ class _AddEmployeePageState extends State<AddEmployeePage> with RouteAware  {
     // add employee
     if (widget.op == Operation.Add)
     {
-      confirmEmployee(emp).then((value) => Navigator.pop(context));
+      await confirmEmployee(emp).then((value) => Navigator.pop(context));
     }
     else
     {
-      updateEmployee(employee!.employeeInfo.email, emp).then((value) => Navigator.pop(context));
+      await updateEmployee(employee!.employeeInfo.email, emp).then((value) => Navigator.pop(context));
     }
 
 
-    return;
+    return Future.value();
   }
   
   TextEditingController salaryController = TextEditingController();
@@ -161,6 +162,8 @@ class _AddEmployeePageState extends State<AddEmployeePage> with RouteAware  {
       },
     );
   }
+
+  AsyncBtnStatesController btnStateController = AsyncBtnStatesController();
 
   @override
   Widget build(BuildContext context) {
@@ -304,9 +307,16 @@ class _AddEmployeePageState extends State<AddEmployeePage> with RouteAware  {
                                   const SizedBox(height: 40),
                                   SizedBox( 
                                     height: 40,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        processInput();
+                                    child: AsyncElevatedBtn.withDefaultStyles(
+                                      asyncBtnStatesController: btnStateController,
+                                      onPressed: () async {
+                                        try {
+                                          btnStateController.update(AsyncBtnState.loading);
+                                          await processInput();
+                                          btnStateController.update(AsyncBtnState.idle);
+                                        } catch (e) {
+                                          btnStateController.update(AsyncBtnState.idle);
+                                        }
                                       },
                                       style: ButtonStyle(
                                         backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  

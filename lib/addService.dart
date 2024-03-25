@@ -167,7 +167,7 @@ class _AddServicePageeState extends State<AddServicePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Ajouter un service'),
-        actions: (widget.service==null)?null:[
+        actions: (widget.service == null)?null:[
           IconButton(
             icon: const Icon(Icons.delete),
             tooltip: 'Suprimer',

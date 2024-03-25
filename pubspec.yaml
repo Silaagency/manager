@@ -39,6 +39,7 @@ dependencies:
   fluttertoast: ^8.2.4
   http: ^0.13.5
   shared_preferences: ^2.0.17
+  async_button: ^2.0.0-beta.1+2
 
 
 dev_dependencies:

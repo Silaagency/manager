@@ -1,3 +1,4 @@
+import 'package:async_button/async_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -72,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
 
-  void processInput()
+  Future<void> processInput() async
   {
     const int fieldCount = 5;
     int validFields = 0;
@@ -103,36 +104,36 @@ class _RegisterPageState extends State<RegisterPage> {
       validFields++;
     }
 
-    if (validFields == fieldCount){
-      // form is valid
+    if (validFields == fieldCount) {
 
-      String name = nameController.text;
-      String email = emailController.text;
-      String phone = phoneController.text;
+      String name = nameController.text.trim();
+      String email = emailController.text.trim();
+      String phone = phoneController.text.trim();
       String password = passwordController.text;
       
       NewEmployeeInfo emp = NewEmployeeInfo(name: name, email: email, phone: phone, password: password, service: _selectedItem!);
 
-      checkEmail(email).then((value) => {
-        if (value == true) {
-          setState(() {
-            emailUsed = true;
-          })
-        }
-        else if (value == false){
-          Navigator.pop(context),
-          createNewEmployee(emp), 
-          //TO DO: make sure employee gets created before quiting
-        }
-      });
+      final status = await checkEmail(email);
+      
+      if (status == true) {
+        setState(() {
+          emailUsed = true;
+        });
+      } else if (status == false) {
+        await createNewEmployee(emp);
+        Navigator.pop(context);
+        
+      }
     }
-
-    return;
   }
+
+  AsyncBtnStatesController btnStateController = AsyncBtnStatesController();
+
+
 
   @override
   Widget build(BuildContext context) {
-
+    
     return Scaffold(
       backgroundColor: AppColors.zeroColor,
       appBar: AppBar(
@@ -140,96 +141,110 @@ class _RegisterPageState extends State<RegisterPage> {
         title: const Text('Inscrivez-vous'),
       ),
       body: Center(
-        
-        child: Card(
-          elevation: 5,
-          color: AppColors.backgroundColor, 
-          child: Padding(
-            padding: EdgeInsets.all(26.0),
-            child: SizedBox(
-              width: 400,
-              child:  Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  DropdownButtonFormField<String>(
-                    value: _selectedItem,
-                    decoration: InputDecoration(
-                      labelText: 'Service', // Label text for the dropdown button
-                      border: OutlineInputBorder(), // Border style for the dropdown button
-                      errorText: getServicesError()
-                    ),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedItem = newValue!; // Update the selected item
-                      });
-                    },
-                    items: services.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                    labelText: 'Nom',
-                    border: OutlineInputBorder(),
-                    errorText: getGenericError(nameController),
-                    ),    
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      border: const OutlineInputBorder(),
-                      errorText: getEmailError(emailController),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: phoneController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    decoration: InputDecoration(
-                      labelText: 'Numéro de téléphone',
-                      border: const OutlineInputBorder(),
-                      errorText: getGenericError(phoneController),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                    labelText: 'mot de passe',
-                    border: const OutlineInputBorder(),
-                    errorText: getGenericError(passwordController),
-                    ),
-                  ),
-                  const SizedBox(height: 25),
-                  Container( 
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        processInput();
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                Card(
+                  elevation: 5,
+                  color: AppColors.backgroundColor, 
+                  child: Padding(
+                    padding: EdgeInsets.all(26.0),
+                    child: SizedBox(
+                      width: 400,
+                      child:  Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          DropdownButtonFormField<String>(
+                            value: _selectedItem,
+                            decoration: InputDecoration(
+                              labelText: 'Service', // Label text for the dropdown button
+                              border: OutlineInputBorder(), // Border style for the dropdown button
+                              errorText: getServicesError()
+                            ),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedItem = newValue!; // Update the selected item
+                              });
+                            },
+                            items: services.map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            
+                          ),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: nameController,
+                            decoration: InputDecoration(
+                            labelText: 'Nom',
+                            border: OutlineInputBorder(),
+                            errorText: getGenericError(nameController),
+                            ),    
+                          ),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              labelText: 'Email',
+                              border: const OutlineInputBorder(),
+                              errorText: getEmailError(emailController),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: phoneController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                            decoration: InputDecoration(
+                              labelText: 'Numéro de téléphone',
+                              border: const OutlineInputBorder(),
+                              errorText: getGenericError(phoneController),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: passwordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                            labelText: 'mot de passe',
+                            border: const OutlineInputBorder(),
+                            errorText: getGenericError(passwordController),
+                            ),
+                          ),
+                          const SizedBox(height: 25),
+                          Container(
+                            height: 40,
+                            child: AsyncElevatedBtn.withDefaultStyles(
+                              asyncBtnStatesController: btnStateController,
+                              onPressed: () async {
+                                try {
+                                  btnStateController.update(AsyncBtnState.loading);
+                                  await processInput();
+                                  btnStateController.update(AsyncBtnState.idle);
+                                } catch(e) {
+                                  btnStateController.update(AsyncBtnState.failure);
+                                }
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor)  
+                              ),
+                              child: Text("S'inscrire", style: defaultTextStyle), // Button text
+                            ),
+                          )
+                        ],
                       ),
-                      child: Text("S'inscrire", style: defaultTextStyle), // Button text
                     ),
                   )
-                ],
-              ),
-            ),
+                ) 
+              ]
+            )
           )
-        ) 
+        )
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
